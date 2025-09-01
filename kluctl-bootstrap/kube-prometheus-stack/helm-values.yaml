@@ -1,0 +1,2 @@
+---
+{{ helmreleases.kube_prometheus_stack[1].spec["values"] | to_yaml }}

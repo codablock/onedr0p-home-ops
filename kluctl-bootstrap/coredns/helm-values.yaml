@@ -1,0 +1,2 @@
+---
+{{ helmreleases.coredns[1].spec["values"] | to_yaml }}

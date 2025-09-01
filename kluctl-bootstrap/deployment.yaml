@@ -1,3 +1,51 @@
 ---
+vars:
+  - file: ../kubernetes/apps/observability/kube-prometheus-stack/app/helmrelease.yaml
+    targetPath: helmreleases.kube_prometheus_stack
+    multidoc: true
+  - file: ../kubernetes/apps/kube-system/cilium/app/helmrelease.yaml
+    targetPath: helmreleases.cilium
+    multidoc: true
+  - file: ../kubernetes/apps/kube-system/gateway-api-crds/app/helmrelease.yaml
+    targetPath: helmreleases.gateway_api_crds
+    multidoc: true
+  - file: ../kubernetes/apps/kube-system/coredns/app/helmrelease.yaml
+    targetPath: helmreleases.coredns
+    multidoc: true
+  - file: ../kubernetes/apps/kube-system/spegel/app/helmrelease.yaml
+    targetPath: helmreleases.spegel
+    multidoc: true
+  - file: ../kubernetes/apps/cert-manager/cert-manager/app/helmrelease.yaml
+    targetPath: helmreleases.cert_manager
+    multidoc: true
+  - file: ../kubernetes/apps/flux-system/flux-operator/app/helmrelease.yaml
+    targetPath: helmreleases.flux_operator
+    multidoc: true
+  - file: ../kubernetes/apps/flux-system/flux-instance/app/helmrelease.yaml
+    targetPath: helmreleases.flux_instance
+    multidoc: true
+
 deployments:
-  - include: deployments
+  - path: namespaces
+  - path: gateway-api-crds
+  - barrier: true
+  - path: kube-prometheus-stack # only CRDs (cilium needs them)
+    vars:
+      - values:
+          only_crds: true
+  - barrier: true
+  - path: cilium
+  - waitReadinessObjects:
+      - kind: Deployment
+        name: cilium-operator
+        namespace: kube-system
+      - kind: CustomResourceDefinition
+        name: ciliumnetworkpolicies.cilium.io
+  - barrier: true
+  - path: kube-prometheus-stack # now the full deployment
+  - path: coredns
+  - path: spegel
+  - path: cert-manager
+  - path: flux-operator
+  - barrier: true
+  - path: flux-instance

@@ -1,0 +1,2 @@
+---
+{{ helmreleases.cert_manager[1].spec["values"] | to_yaml }}

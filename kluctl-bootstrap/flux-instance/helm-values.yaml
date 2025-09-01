@@ -1,0 +1,2 @@
+---
+{{ helmreleases.flux_instance[0].spec["values"] | to_yaml }}

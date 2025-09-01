@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: kube-prometheus-stack
+  repo: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
+  chartVersion: {{ helmreleases.kube_prometheus_stack[0].spec.ref.tag }}
+  namespace: observability
+  skipPrePull: true

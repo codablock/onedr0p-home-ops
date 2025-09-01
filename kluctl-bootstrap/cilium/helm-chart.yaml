@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: cilium
+  repo: oci://ghcr.io/home-operations/charts-mirror/cilium
+  chartVersion: '{{ helmreleases.cilium[0].spec.ref.tag }}'
+  namespace: kube-system
+  skipPrePull: true

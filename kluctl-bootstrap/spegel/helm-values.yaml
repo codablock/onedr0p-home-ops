@@ -1,0 +1,2 @@
+---
+{{ helmreleases.spegel[1].spec["values"] | to_yaml }}

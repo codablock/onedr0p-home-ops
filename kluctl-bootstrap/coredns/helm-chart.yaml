@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: coredns
+  repo: oci://ghcr.io/coredns/charts/coredns
+  chartVersion: '{{ helmreleases.coredns[0].spec.ref.tag }}'
+  namespace: kube-system
+  skipPrePull: true

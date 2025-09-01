@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: cert-manager
+  repo: oci://quay.io/jetstack/charts/cert-manager
+  chartVersion: '{{ helmreleases.cert_manager[0].spec.ref.tag }}'
+  namespace: cert-manager
+  skipPrePull: true

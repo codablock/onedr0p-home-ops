@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: spegel
+  repo: oci://ghcr.io/spegel-org/helm-charts/spegel
+  chartVersion: '{{ helmreleases.spegel[0].spec.ref.tag }}'
+  namespace: kube-system
+  skipPrePull: true

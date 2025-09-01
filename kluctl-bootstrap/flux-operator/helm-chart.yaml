@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: flux-operator
+  repo: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
+  chartVersion: '{{ helmreleases.flux_operator[0].spec.ref.tag }}'
+  namespace: flux-system
+  skipPrePull: true

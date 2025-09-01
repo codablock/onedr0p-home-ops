@@ -1,0 +1,7 @@
+---
+helmChart:
+  releaseName: gateway-api-crds
+  repo: oci://ghcr.io/wiremind/wiremind-helm-charts/gateway-api-crds
+  chartVersion: '{{ helmreleases.gateway_api_crds[0].spec.ref.tag }}'
+  namespace: kube-system
+  skipPrePull: true

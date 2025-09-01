@@ -1,0 +1,16 @@
+resources:
+  - helm-rendered.yaml
+
+# {% if only_crds | default(false) %}
+patches:
+  - target: {}
+    patch: |
+      - op: add
+        path: /metadata/annotations/kluctl.io~1ignore
+        value: "true"
+  - target:
+      kind: CustomResourceDefinition
+    patch: |
+      - op: replace
+        path: /metadata/annotations/kluctl.io~1ignore
+        value: "false"
